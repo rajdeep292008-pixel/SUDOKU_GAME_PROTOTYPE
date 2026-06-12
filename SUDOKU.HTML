@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sudoku Master Pro</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; transition: 0.3s; margin: 0; }
+        .game-container { text-align: center; }
+        
+        /* Modal Overlay */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 100; color: white; }
+        .modal { background: #333; padding: 30px; border-radius: 12px; text-align: center; border: 2px solid #555; }
+        .btn-yes { background: #39ff14; color: black; border: none; padding: 12px 24px; font-size: 18px; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        .btn-no { background: #ff4444; color: white; border: none; padding: 12px 24px; font-size: 18px; cursor: pointer; margin-left: 10px; border-radius: 5px; }
+
+        #timer { font-size: 20px; margin-bottom: 10px; font-weight: bold; }
+        #grid { display: grid; grid-template-columns: repeat(9, 40px); gap: 2px; margin: 20px auto; }
+        .cell { width: 40px; height: 40px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; }
+        .cell input { width: 100%; height: 100%; border: none; text-align: center; font-size: 18px; }
+        .fixed { font-weight: bold; background: #eee; }
+        body.neon { background: #000; color: #39ff14; }
+        body.cyberpunk { background: #1a1a2e; color: #ff00ff; }
+    </style>
+</head>
+<body>
+    
+    <div id="overlay">
+        <div class="modal">
+            <h2>Are you ready to start?</h2>
+            <button class="btn-yes" onclick="initGame()">YES</button>
+            <button class="btn-no" onclick="alert('Whenever you are ready!')">NO</button>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <h1>Sudoku Master Pro</h1>
+        <div id="timer">Time: 00:00</div>
+        <div id="grid"></div>
+        <div class="controls">
+            <button onclick="SudokuEngine.newGame()">New Game</button>
+            <button onclick="SudokuEngine.giveHint()">Hint</button>
+            <button onclick="SudokuEngine.aiSolve()">AI Solve</button>
+            <select onchange="SudokuEngine.setDifficulty(this.value)">
+                <option value="30">Easy</option><option value="45">Medium</option><option value="60">Hard</option>
+            </select>
+            <select onchange="SudokuEngine.setTheme(this.value)">
+                <option value="">Classic</option><option value="neon">Neon</option><option value="cyberpunk">Cyberpunk</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        // Start the game logic when YES is clicked
+        function initGame() {
+            document.getElementById('overlay').style.display = 'none';
+            SudokuEngine.generate();
+        }
+
+        const SudokuEngine = {
+            grid: [],
+            timerInterval: null,
+            seconds: 0,
+
+            startTimer() {
+                clearInterval(this.timerInterval);
+                this.seconds = 0;
+                this.timerInterval = setInterval(() => {
+                    this.seconds++;
+                    const mins = Math.floor(this.seconds / 60).toString().padStart(2, '0');
+                    const secs = (this.seconds % 60).toString().padStart(2, '0');
+                    document.getElementById('timer').textContent = `Time: ${mins}:${secs}`;
+                }, 1000);
+            },
+
+            newGame() { this.generate(); },
+            setDifficulty(val) { localStorage.setItem('diff', val); this.generate(); },
+            setTheme(t) { document.body.className = t; localStorage.setItem('theme', t); },
+
+            generate() {
+                let board = Array.from({length: 9}, () => Array(9).fill(0));
+                this.fillBoard(board);
+                let diff = parseInt(localStorage.getItem('diff')) || 40;
+                for(let i = 0; i < diff; i++) board[Math.floor(Math.random()*9)][Math.floor(Math.random()*9)] = 0;
+                this.grid = board; 
+                this.render();
+                this.startTimer();
+            },
+
+            fillBoard(b) {
+                for(let i=0; i<81; i++) {
+                    let r = Math.floor(i/9), c = i%9;
+                    if(b[r][c] === 0) {
+                        let nums = [1,2,3,4,5,6,7,8,9].sort(() => Math.random() - 0.5);
+                        for(let n of nums) {
+                            if(this.isValid(b, r, c, n)) {
+                                b[r][c] = n;
+                                if(this.fillBoard(b)) return true;
+                                b[r][c] = 0;
+                            }
+                        }
+                        return false;
+                    }
+                }
+                return true;
+            },
+
+            isValid(b, r, c, n) {
+                for(let i=0; i<9; i++) {
+                    if(b[r][i] == n || b[i][c] == n || b[3*Math.floor(r/3)+Math.floor(i/3)][3*Math.floor(c/3)+(i%3)] == n) return false;
+                }
+                return true;
+            },
+
+            verify() {
+                if (this.grid.flat().includes(0)) return;
+                const check = (arr) => [...arr].sort((a,b)=>a-b).every((v,i) => v === i+1);
+                let valid = true;
+                for(let i=0; i<9; i++) {
+                    if(!check(this.grid[i]) || !check(this.grid.map(r => r[i]))) valid = false;
+                }
+                if(valid) {
+                    clearInterval(this.timerInterval);
+                    setTimeout(() => alert(`SOLVED! Time: ${document.getElementById('timer').textContent}`), 200);
+                }
+            },
+
+            giveHint() { alert('Feature in development.'); },
+            aiSolve() { alert('Feature in development.'); },
+
+            render() {
+                const gridEl = document.getElementById('grid'); gridEl.innerHTML = '';
+                this.grid.flat().forEach((val, i) => {
+                    const cell = document.createElement('div'); cell.className = 'cell';
+                    if(val !== 0) { cell.textContent = val; cell.classList.add('fixed'); }
+                    else {
+                        const inp = document.createElement('input'); inp.type = 'number';
+                        inp.oninput = (e) => {
+                            this.grid[Math.floor(i/9)][i%9] = parseInt(e.target.value) || 0;
+                            this.verify();
+                        };
+                        cell.appendChild(inp);
+                    }
+                    gridEl.appendChild(cell);
+                });
+            }
+        };
+
+        window.onload = () => {
+            document.body.className = localStorage.getItem('theme') || '';
+        };
+    </script>
+</body>
+</html>
