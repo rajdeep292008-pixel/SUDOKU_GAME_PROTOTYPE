@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SudokuForge – Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <style>
+    /* Home photo carousel styles (moderate size, square, centered) */
+    #photo-carousel{display:flex;align-items:center;justify-content:center;margin:18px 0}
+    #photo-carousel img{width:320px;height:320px;object-fit:cover;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.12);transition:opacity 400ms ease}
+    #photo-carousel img.hidden{opacity:0}
+    #photo-carousel img.visible{opacity:1}
+    @media (max-width:600px){#photo-carousel img{width:220px;height:220px}}
+    </style>
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader-spinner"></div>
+        <div class="loader-tip-box" id="tip-text">Loading tip...</div>
+    </div>
+
+    <div class="cursor" id="cursor-dot"></div>
+    <div class="cursor-trail" id="cursor-trail"></div>
+
+    <div class="app-container">
+        <aside id="sidebar-container"></aside>
+        <main class="main-content">
+            <section class="home-hero">
+                
+                <div class="home-text">
+                    <h1>Sharpen your mind. Forge your logic.</h1>
+                    <p>Challenge yourself with classic Sudoku puzzles, learn solving techniques, and use our AI solver to conquer any grid. Forge your path to mastery.</p>
+                </div>
+                <div id="photo-carousel" aria-hidden="false">
+                    <img id="carousel-img" class="visible" src="assets/sudoku/1.JPG" alt="Sudoku photo placeholder">
+                </div>
+            </section>
+
+            <section class="quick-links">
+                <h2>🧩 Start Your Journey</h2>
+                <div class="card-grid">
+                    <a href="solve.html" class="feature-card">
+                        <span class="card-emoji">🔧</span>
+                        <h3>Solve</h3>
+                        <p>Play interactive Sudoku with five difficulty levels.</p>
+                    </a>
+                    <a href="solver.html" class="feature-card">
+                        <span class="card-emoji">🤖</span>
+                        <h3>AI Solver</h3>
+                        <p>Input any puzzle and let the backtracking solver solve it instantly.</p>
+                    </a>
+                    <a href="learn.html" class="feature-card">
+                        <span class="card-emoji">📚</span>
+                        <h3>Learn</h3>
+                        <p>Master rules, strategies, and practice with mini puzzles.</p>
+                    </a>
+                </div>
+            </section>
+
+            <footer>
+                <p>SudokuForge &copy; 2026 &mdash; Forge your logic. Solve the grid.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="components/sidebar.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/home-carousel.js" defer></script>
+    <script src="js/loader.js" defer></script>
+    <script src="js/tab-switch.js" defer></script>
+    <script src="js/cycle.js" defer></script>
+    <script src="js/solve.js" defer></script>
+    <script src="js/ai_solver.js" defer></script>
+    <script src="js/creator.js" defer></script>
+
+       <!-- New Settings Scripts -->
+    <script src="js/key-shortcut.js" defer></script>
+    <script src="js/right-click.js" defer></script>
+    <script src="js/achievements.js" defer></script>
+</body>
+</html>
