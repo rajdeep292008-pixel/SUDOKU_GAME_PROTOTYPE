@@ -1,61 +1,39 @@
-@media (max-width: 1024px) {
-    :root {
-        --sidebar-width: 200px;
-    }
-    .main-content {
-        margin-left: var(--sidebar-width);
-    }
-}
-
-@media (max-width: 768px) {
-    :root {
-        --sidebar-width: 60px;
-    }
-    .main-content {
-        margin-left: var(--sidebar-width);
-        padding: 1.2rem;
-    }
-    .sudoku-table td {
-        width: 38px;
-        height: 38px;
-        font-size: 1.1rem;
-    }
-    .sudoku-table td input {
-        font-size: 1.1rem;
-    }
-    .difficulty-selector {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .action-buttons {
-        flex-direction: column;
-    }
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
-    .creator-card {
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-    h1 { font-size: 1.8rem; }
-    h2 { font-size: 1.3rem; }
+@media (max-width: 620px) {
+  .container {
+    padding: 20px 16px;
+  }
+  .sudoku-board td {
+    width: 40px;
+    height: 40px;
+  }
+  .sudoku-board td input {
+    font-size: 1.1rem;
+  }
+  .sudoku-board td.given {
+    font-size: 1.1rem;
+  }
+  button {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+  .diff-btn {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .main-content {
-        padding: 0.8rem;
-    }
-    .sudoku-table td {
-        width: 30px;
-        height: 30px;
-        font-size: 0.9rem;
-    }
-    .sudoku-table td input {
-        font-size: 0.9rem;
-    }
-    .btn-primary,
-    .btn-secondary {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
+  .sudoku-board td {
+    width: 34px;
+    height: 34px;
+  }
+  .sudoku-board td input {
+    font-size: 1rem;
+  }
+  .action-group {
+    gap: 8px;
+  }
+  .brand h1 {
+    font-size: 1.5rem;
+  }
 }

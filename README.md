@@ -1,9 +1,9 @@
-# 🧩 SudokuForge
+# 🧩 SudokuForge – Simplified Edition
 
 > Forge your logic. Solve the grid.
 
 <p align="center"> 
-  <img src="assets/screenshots/dextop-view_home_page.png" alt="SudokuForge Logo" width="160" style="border-radius: 16px;"> 
+  <img src="assets/screenshots/solve_page.JPG" alt="SudokuForge Solve" width="600" style="border-radius: 16px;"> 
 </p>
 
 <p align="center"> 
@@ -14,157 +14,98 @@
   <a href="#"><img src="https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge" alt="Status"></a> 
 </p>
 
-## 📖 Table of Contents
-- [Overview](#-overview)
-- [Features](#-features)
-- [Screenshots](#-screenshots)
-- [Live Demo](#-live-demo)
-- [Tech Stack](#-tech-stack)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Project Structure](#-project-structure)
-- [Contributing](#-contributing)
-- [Roadmap](#-roadmap)
-- [License](#-license)
-- [Acknowledgments](#-acknowledgments)
-- [Authors](#-authors)
-
 ## 📌 Overview
-SudokuForge is a fully client‑side Sudoku web application built with vanilla HTML, CSS, and JavaScript. It offers:
 
-*   A puzzle generator with five difficulty levels
-*   An AI backtracking solver that can solve any valid puzzle
-*   A hint system that suggests logical moves
-*   A learning centre with techniques and a 4×4 practice grid
-*   Keyboard shortcuts, right‑click context menu, and a 50‑achievement system
+**SudokuForge – Simplified Edition** is a clean, two‑page Sudoku web app built with vanilla HTML, CSS, and JavaScript. It focuses on the core experience:
 
-The project originated from the `SUDOKU_GAME_PROTOTYPE` repository and has been significantly extended with modern UI/UX, gamification, and accessibility features.
+- **Solve page** – Play Sudoku with 5 difficulty levels, get hints, check your solution, and send puzzles to the AI solver.
+- **AI Solver page** – Uses a backtracking algorithm to solve any valid 9×9 puzzle instantly.
+
+All unnecessary extras have been removed, making it lightweight, fast, and easy to understand.
 
 ## ✨ Features
 
 | Category | Highlights |
 | :--- | :--- |
-| **🎮 Gameplay** | 5 difficulty levels (Easy, Moderate, Hard, Gentle, Diabolical) – puzzle generator with unique solutions |
-| **🤖 AI Solver** | Backtracking algorithm – instant solution for any valid puzzle |
-| **💡 Hint Engine** | Naked single strategy – highlights the cell and fills the correct number |
-| **⌨️ Keyboard Shortcuts** | `1-9` enter number, `Delete` clear, `N` new game, `S` solve, `H` hint, `U` undo, `R` redo, arrow keys navigation |
-| **🖱️ Right‑Click Menu** | Custom context menu for fast number entry, clear, hint, and pencil marks |
-| **🏆 Achievements** | 50 achievements across 15 categories (Progress, Difficulty, Speed, Skill, AI, Creation, etc.) |
-| **⚙️ Settings Dashboard** | View shortcuts, right‑click details, and track achievement progress |
-| **📚 Learn Page** | Sudoku rules, basic/intermediate/advanced strategies, interactive 4×4 practice grid |
-| **🎨 UI/UX** | Responsive design, custom cursor, animated loader with rotating tips, fade‑in animations |
-| **🔄 Cross‑Page Transfer** | Puzzles from “Solve” page can be sent to “AI Solver” with one click |
+| **🎮 Solve Page** | 5 difficulty levels (Easy, Moderate, Hard, Gentle, Diabolical) – puzzle generator with unique solutions |
+| **🤖 AI Solver** | Backtracking algorithm – solves any valid puzzle with one click |
+| **💡 Hint Engine** | Logical hints (naked single) + solution‑based fallback – works even on Diabolical puzzles |
+| **⌨️ Keyboard Shortcuts** | `1-9` enter number, `Delete` clear, `N` new game, `S` solve, `H` hint, `C` check, arrow keys navigation |
+| **🔄 Auto Transfer** | Click "🤖 AI Solver" on the Solve page – puzzle is automatically loaded into the Solver page |
+| **🎨 UI/UX** | Responsive design, clean card layout, consistent colour theme (blue primary / amber accent) |
+| **📦 Zero Dependencies** | Pure HTML/CSS/JS – no frameworks, no build step |
 
 ## 🖼️ Screenshots
-<details> 
-<summary>📸 Click to expand</summary>
 
-| Home | Solve | AI Solver |
-| :---: | :---: | :---: |
-| <img src="assets/screenshots/dextop-view_home_page.png" width="240"> | <img src="assets/screenshots/solve_page.JPG" width="240"> | <img src="assets/screenshots/ai_solver.JPG" width="240"> |
-
-| Learn | Creator | Settings |
-| :---: | :---: | :---: |
-| <img src="assets/screenshots/learn_page.JPG" width="240"> | <img src="assets/screenshots/creator_page.JPG" width="240"> | <img src="assets/screenshots/settings_user.JPG" width="240"> |
-</details>
-
-## 🚀 Live Demo
-> **Note:** The project is fully static. You can run it locally or deploy to any static hosting service (GitHub Pages, Netlify, Vercel).
-> *Live demo placeholder – open index.html in your browser.*
+| Solve Page | AI Solver Page |
+| :---: | :---: |
+| !Solve Page | *(Add your screenshot here: ai_solver_page.png)* |
 
 ## 🛠️ Tech Stack
-*   **HTML5** – Semantic markup, accessibility‑friendly structure
-*   **CSS3** – CSS variables, Grid/Flexbox, custom animations, responsive breakpoints
-*   **JavaScript (ES6)** – Puzzle generation, backtracking solver, event handling, DOM manipulation
-*   **LocalStorage** – Cross‑page puzzle transfer and achievement persistence
-*   *No frameworks or external dependencies – pure vanilla code.*
+
+- **HTML5** – Semantic structure
+- **CSS3** – Custom properties, Flexbox/Grid, responsive breakpoints
+- **JavaScript (ES6)** – Puzzle generation, backtracking solver, event handling, DOM manipulation
+- **LocalStorage** – Cross‑page puzzle transfer
 
 ## 📦 Installation
-1. **Clone the repository**
+
+1. **Download or clone** the project folder.
+2. **Open `index.html`** in your browser (double‑click or use a local server).
    ```bash
-   git clone https://github.com/affan675/SUDOKU_GAME_PROTOTYPE.git
-   cd SUDOKU_GAME_PROTOTYPE
+   npx serve .
    ```
-2. **Open the application**
-   *   Double‑click `index.html` in your file explorer, OR
-   *   Use a local development server (recommended):
-     ```bash
-     npx serve .
-     ```
-     *Or use the VS Code "Live Server" extension.*
+No dependencies, no build – just works.
 
-No build steps or package installation required.
+## 🎮 Usage
 
-## 🎮 Usage 
-*   **Play Sudoku** – Go to `solve.html`, choose a difficulty, click **New Game**, then fill the grid.
-*   **Get a Hint** – Click the 💡 **Hint** button – the engine will fill one logical cell.
-*   **AI Solve** – Click 🤖 **Solve with AI** to send the current puzzle to the AI Solver page.
-*   **Standalone AI Solver** – Visit `solver.html`, enter any custom puzzle, and click 🧠 **Solve**.
-*   **Learn Strategies** – Explore `learn.html` for rules and techniques, plus a 4×4 practice grid.
-*   **View Achievements** – Open `settings.html` → User Profile tab.
-*   **Keyboard Shortcuts** – Focus any cell and press keys (works on Solve and Solver pages).
-*   **Right‑Click Menu** – Right‑click any empty cell for quick actions.
+*   **Play Sudoku** – Open `index.html`, choose a difficulty, click **New Game**, fill the grid.
+*   **Get a Hint** – Click **💡 Hint** – the engine fills one cell (logical or solution‑based if needed).
+*   **Check Solution** – Click **✅ Check** to see if you solved it correctly.
+*   **Use AI Solver** – Click **🤖 AI Solver** – current puzzle is sent automatically to `solver.html`. Then click **Solve Puzzle** to see the solution.
+*   **Keyboard Shortcuts** – Focus any cell and use keys: `1-9`, `Delete`, `Arrow keys`, `N`, `H`, `S`, `C`.
 
-## 📁 Project Structure 
+## 📁 Project Structure
+
 ```text
-SUDOKU_GAME_PROTOTYPE/
-├── index.html           # Home page with carousel
-├── solve.html           # Interactive puzzle solving
-├── solver.html          # AI solver (backtracking)
-├── learn.html           # Tutorials and 4×4 practice
-├── creator.html         # Dual‑credit creator profile
-├── settings.html        # Keyboard shortcuts & achievements
+sudokuforge-simple/
+├── index.html          # Solve page
+├── solver.html         # AI Solver page
 ├── css/
-│   ├── variables.css    # CSS custom properties
-│   ├── style.css        # Main styles
-│   ├── responsive.css   # Mobile/tablet breakpoints
-│   ├── loader.css       # Loader overlay animation
-│   ├── cursor.css       # Custom cursor styles
-│   ├── animations.css   # Fade‑in / slide‑in keyframes
-│   └── sidebar.css      # Sidebar navigation styles
+│   ├── main.css        # All styles (variables, grid, buttons, etc.)
+│   └── responsive.css  # Mobile/tablet breakpoints
 ├── js/
-│   ├── main.js          # Sidebar loading, cursor, global init
-│   ├── solve.js         # Puzzle generation, rendering, game logic
-│   ├── ai_solver.js     # Backtracking solver core
-│   ├── hint.js          # Hint engine (naked single)
-│   ├── key-shortcut.js  # Global keyboard shortcuts
-│   ├── right-click.js   # Custom context menu
-│   ├── achievements.js  # 50‑achievement system
-│   ├── loader.js        # Loader with rotating tips
-│   ├── tab-switch.js    # Dynamic page title
-│   ├── home-carousel.js # Home page image carousel
-│   ├── creator.js       # Typing effect on creator page
-│   └── cycle.js         # (Additional utility)
-├── components/
-│   └── sidebar.html     # Reusable sidebar markup
-└── assets/
-    ├── sudoku/          # Carousel images
-    └── screenshots/     # Documentation screenshots
+│   ├── common.js       # Shared: grid render, solver core, navigation
+│   ├── solve.js        # Solve page logic (generator, hints, check, transfer)
+│   ├── solver.js       # AI Solver page logic (auto-load, solve, clear)
+│   └── hint.js         # Advanced hint engine (fixes Diabolical & completion)
+└── assets/             # Screenshots and images
 ```
 
-## 🤝 Contributing 
-Contributions are welcome! Please follow the existing code style and keep changes focused. If you’re adding a new feature, update the relevant documentation and include screenshots.
+## 🤝 Contributing
 
-## 🔮 Roadmap 
-- [ ] Publish on GitHub Pages with a live demo URL
-- [ ] Add Progressive Web App (PWA) support for offline play
-- [ ] Implement advanced hint strategies (hidden pairs, X‑Wing, Swordfish)
-- [ ] Add puzzle sharing (export/import as string)
-- [ ] Dark / light theme toggle
-- [ ] Accessibility improvements (ARIA labels, keyboard‑only navigation)
+Contributions are welcome! If you find a bug or want to improve the hint engine (e.g., add hidden pairs, X‑Wing), feel free to open an issue or pull request.
 
-## 📄 License 
-This project is licensed under the MIT License – see the `LICENSE` file for details.
+## 🔮 Roadmap (possible additions)
 
-## 🙏 Acknowledgments 
-*   **Rajdeep (rajdeep292008-pixel)** – Original repository owner and inspiration. His AI‑augmented “MANHATTAN” coding philosophy and clean modular frontend architecture provided the foundation for this project.
-*   **Affan Adil** – Lead developer who designed and implemented the achievement system, keyboard shortcuts, right‑click menu, settings dashboard, modern UI/UX, and all quality‑of‑life enhancements.
+- Dark / light theme toggle
+- Export/import puzzle as string
+- PWA support for offline play
+- Timer and move counter
 
-## 👤 Authors 
-**Affan Adil** – Lead Developer  
-Portfolio | Email | GitHub
+## 📄 License
 
-**Rajdeep** – Original Repository Owner  
-GitHub
+MIT License – see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+Inspired by the original SudokuForge project by Rajdeep (rajdeep292008-pixel). This simplified version refines the core solving experience while keeping the same visual identity.
+
+## 👤 Author
+
+**Affan Adil** – Lead Developer
+*   GitHub: @affan675
+
+Built with passion for logic and clean code.
 
 <p align="center"> Made with ❤️ — forge your logic, solve the grid. </p>

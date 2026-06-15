@@ -1,166 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SudokuForge – Solver</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/loader.css">
-    <link rel="stylesheet" href="css/cursor.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SudokuForge · AI Solver</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="loader-overlay">
-        <div class="loader-spinner"></div>
-        <div class="loader-tip-box" id="tip-text">Loading tip...</div>
+<div class="app-wrapper">
+  <main class="container">
+    <div class="brand">
+      <h1>🤖 SudokuForge · AI Solver</h1>
+      <p class="tagline">Backtracking solver — solves any valid puzzle</p>
     </div>
 
-    <div class="cursor" id="cursor-dot"></div>
-    <div class="cursor-trail" id="cursor-trail"></div>
-
-    <div class="app-container">
-        <aside id="sidebar-container"></aside>
-        <main class="main-content">
-            <div class="solver-header">
-                <h1>🤖 AI Sudoku Solver</h1>
-                <p>Enter your unsolved puzzle (1-9) and let the backtracking algorithm do its magic.</p>
-                <div class="action-buttons">
-                    <button id="solve-btn" class="btn-primary">🧠 Solve</button>
-                    <button id="clear-btn" class="btn-secondary">🗑️ Clear</button>
-                </div>
-                <div id="solver-message" class="message"></div>
-            </div>
-
-            <div class="sudoku-grid-container">
-                <table id="solver-grid" class="sudoku-table">
-                    <!-- Generated below -->
-                </table>
-            </div>
-        </main>
+    <div class="page-tabs">
+      <a href="index.html" class="tab">📌 Solve</a>
+      <a href="solver.html" class="tab active">🤖 AI Solver</a>
     </div>
 
-    <script src="components/sidebar.js"></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/loader.js" defer></script>
-    <script src="js/tab-switch.js" defer></script>
-    <script src="js/cycle.js" defer></script>
-    <script src="js/solve.js" defer></script>
-    <script src="js/ai_solver.js" defer></script>
-    <script src="js/creator.js" defer></script>
+    <div class="action-group">
+      <button id="solveAIBtn" class="btn-primary">🧠 Solve Puzzle</button>
+      <button id="clearSolverBtn" class="btn-outline">🗑️ Clear Grid</button>
+    </div>
 
-       <!-- New Settings Scripts -->
-    <script src="js/key-shortcut.js" defer></script>
-    <script src="js/right-click.js" defer></script>
-    <script src="js/achievements.js" defer></script>
-            <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const gridTable = document.getElementById('solver-grid');
-            const solveBtn = document.getElementById('solve-btn');
-            const clearBtn = document.getElementById('clear-btn');
-            const messageDiv = document.getElementById('solver-message');
+    <div id="solverStatus" class="status-message">✨ Puzzle automatically loaded from Solve page (if any)</div>
 
-            function createEmptyGrid() {
-                // editable = false → all cells are inputs, empty
-                renderPuzzleGrid(gridTable, Array.from({ length: 9 }, () => Array(9).fill(0)), false);
-            }
+    <div class="grid-container">
+      <table id="solver-grid" class="sudoku-board"></table>
+    </div>
 
-            // Check if a puzzle was sent from the Solve page
-            const stored = localStorage.getItem('sudokuForge_puzzle');
-            if (stored) {
-                try {
-                    const puzzle = JSON.parse(stored);
-                    // Fill the grid (all cells become inputs with the given numbers)
-                    renderPuzzleGrid(gridTable, puzzle, false);
-                    // Clear storage so refreshing shows an empty grid
-                    localStorage.removeItem('sudokuForge_puzzle');
-                    messageDiv.textContent = '📋 Puzzle loaded from Solve page. Click "Solve" to see the solution.';
-                } catch (e) {
-                    createEmptyGrid();
-                }
-            } else {
-                createEmptyGrid();
-            }
+    <div class="shortcuts-note">
+      ⌨️ 1-9 · Delete · Arrow keys · S (solve) · C (clear)
+    </div>
+  </main>
+</div>
 
-            solveBtn.addEventListener('click', () => {
-                // Read the puzzle the user entered
-                const userGrid = readUserGrid(gridTable);
-                const hasInput = userGrid.some(row => row.some(cell => cell !== 0));
-                if (!hasInput) {
-                    messageDiv.textContent = '⚠️ Please enter some numbers.';
-                    return;
-                }
-
-                // Copy the grid so we don't modify the original
-                const board = userGrid.map(row => [...row]);
-
-                // Use the solver from solve.js (solveSudokuDirect)
-                const success = solveSudokuDirect(board);
-
-                if (success) {
-                    // board now contains the solved puzzle
-                    renderPuzzleGrid(gridTable, board, false);
-                    messageDiv.textContent = '✅ Puzzle solved!';
-                } else {
-                    messageDiv.textContent = '❌ Unsolvable puzzle. Check your input.';
-                }
-            });
-
-            clearBtn.addEventListener('click', () => {
-                createEmptyGrid();
-                messageDiv.textContent = '';
-                localStorage.removeItem('sudokuForge_puzzle');
-            });
-
-            // Listen for global keyboard shortcuts and right-click events
-            document.addEventListener('sudoku:enter-number', (e) => {
-                const number = e.detail.number;
-                let targetInput = e.detail.cell ? e.detail.cell.querySelector('input') : document.activeElement;
-                
-                if (targetInput && targetInput.tagName === 'INPUT' && targetInput.closest('#solver-grid')) {
-                    targetInput.value = number;
-                    targetInput.dispatchEvent(new Event('input'));
-                }
-            });
-
-            document.addEventListener('sudoku:clear-cell', (e) => {
-                let targetInput = e.detail.cell ? e.detail.cell.querySelector('input') : document.activeElement;
-                if (targetInput && targetInput.tagName === 'INPUT' && targetInput.closest('#solver-grid')) {
-                    targetInput.value = '';
-                    targetInput.dispatchEvent(new Event('input'));
-                }
-            });
-
-            document.addEventListener('sudoku:navigate', (e) => {
-                const direction = e.detail.direction;
-                const currentInput = document.activeElement;
-                if (!currentInput || currentInput.tagName !== 'INPUT' || !currentInput.closest('#solver-grid')) return;
-
-                const td = currentInput.closest('td');
-                const tr = td.closest('tr');
-                const colIndex = Array.from(tr.cells).indexOf(td);
-                const rowIndex = Array.from(tr.parentElement.rows).indexOf(tr);
-
-                let nextRow = rowIndex;
-                let nextCol = colIndex;
-
-                if (direction === 'ArrowUp') nextRow--;
-                if (direction === 'ArrowDown') nextRow++;
-                if (direction === 'ArrowLeft') nextCol--;
-                if (direction === 'ArrowRight') nextCol++;
-
-                if (nextRow >= 0 && nextRow < 9 && nextCol >= 0 && nextCol < 9) {
-                    const nextCell = gridTable.rows[nextRow].cells[nextCol];
-                    const nextInput = nextCell.querySelector('input');
-                    if (nextInput) nextInput.focus();
-                }
-            });
-        });
-    </script>
+<script src="js/common.js"></script>
+<script src="js/solver.js"></script>
 </body>
 </html>
