@@ -3,7 +3,7 @@
 > Forge your logic. Solve the grid.
 
 <p align="center"> 
-  <img src="assets/screenshots/solve_page.JPG" alt="SudokuForge Solve" width="600" style="border-radius: 16px;"> 
+  <img src="assets/screenshots/solve.JPG" alt="SudokuForge Solve" width="600" style="border-radius: 16px;"> 
 </p>
 
 <p align="center"> 
@@ -39,7 +39,7 @@ All unnecessary extras have been removed, making it lightweight, fast, and easy 
 
 | Solve Page | AI Solver Page |
 | :---: | :---: |
-| !Solve Page | *(Add your screenshot here: ai_solver_page.png)* |
+| ![Solve Page](assets/screenshots/solve_page.JPG) | ![AI Solver Page](assets/screenshots/ai_solver.JPG) |
 
 ## 🛠️ Tech Stack
 
