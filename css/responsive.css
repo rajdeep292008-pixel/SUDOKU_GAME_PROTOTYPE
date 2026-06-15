@@ -1,0 +1,39 @@
+@media (max-width: 620px) {
+  .container {
+    padding: 20px 16px;
+  }
+  .sudoku-board td {
+    width: 40px;
+    height: 40px;
+  }
+  .sudoku-board td input {
+    font-size: 1.1rem;
+  }
+  .sudoku-board td.given {
+    font-size: 1.1rem;
+  }
+  button {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+  .diff-btn {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sudoku-board td {
+    width: 34px;
+    height: 34px;
+  }
+  .sudoku-board td input {
+    font-size: 1rem;
+  }
+  .action-group {
+    gap: 8px;
+  }
+  .brand h1 {
+    font-size: 1.5rem;
+  }
+}

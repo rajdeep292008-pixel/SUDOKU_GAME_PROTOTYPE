@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SudokuForge · Solve</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app-wrapper">
+  <main class="container">
+    <div class="brand">
+      <h1>🔧 SudokuForge</h1>
+      <p class="tagline">Forge your logic — solve the grid</p>
+    </div>
+
+    <div class="page-tabs">
+      <a href="index.html" class="tab active">📌 Solve</a>
+      <a href="solver.html" class="tab">🤖 AI Solver</a>
+    </div>
+
+    <div class="difficulty-panel">
+      <button data-diff="easy" class="diff-btn active">Easy</button>
+      <button data-diff="moderate" class="diff-btn">Moderate</button>
+      <button data-diff="hard" class="diff-btn">Hard</button>
+      <button data-diff="gentle" class="diff-btn">Gentle</button>
+      <button data-diff="diabolical" class="diff-btn">Diabolical</button>
+    </div>
+
+    <div class="action-group">
+      <button id="newGameBtn" class="btn-primary">✨ New Game</button>
+      <button id="checkBtn" class="btn-outline">✅ Check</button>
+      <button id="hintBtn" class="btn-warning">💡 Hint</button>
+      <button id="aiSolveBtn" class="btn-ai">🤖 AI Solver</button>
+    </div>
+
+    <div id="statusMsg" class="status-message">⭐ Choose difficulty & start playing</div>
+
+    <div class="grid-container">
+      <table id="solve-grid" class="sudoku-board"></table>
+    </div>
+
+    <div class="shortcuts-note">
+      ⌨️ 1-9 · Delete · Arrow keys · N (new) · H (hint) · S (solve with AI)
+    </div>
+  </main>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/hint.js"></script>
+<script src="js/solve.js"></script>
+</body>
+</html>
